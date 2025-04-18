@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "mq2.h": "c"
+        "mq2.h": "c",
+        "beep.h": "c"
     }
 }

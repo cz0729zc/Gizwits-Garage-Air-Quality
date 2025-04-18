@@ -12,6 +12,7 @@
 #include "stdio.h"      //包含需要的头文件
 #include "stdarg.h"		//包含需要的头文件 
 #include "string.h"     //包含需要的头文件
+#include "stm32f10x_usart.h"
 
 #define USART2_RX_ENABLE     1      //是否开启接收功能  1：开启  0：关闭
 #define USART2_TXBUFF_SIZE   1024   //定义串口2 发送缓冲区大小 1024字节

@@ -24,6 +24,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
 #include "PM25.h"
+#include "usart1.h"
+#include "usart2.h"
+#include "gizwits_product.h"
+#include "gizwits_protocol.h"
+
 
 extern char Usart1_RxCompleted;     // 接收完成标志
 extern char Usart1_RxBuff[]; // 接收缓冲区
@@ -64,16 +69,14 @@ extern char Usart1_RxBuff[]; // 接收缓冲区
 ///*参  数：无                                       */
 ///*返回值：无                                       */
 ///*-------------------------------------------------*/
-//void USART2_IRQHandler(void) {
-//    if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET) {
-//        USART_ClearITPendingBit(USART2, USART_IT_RXNE); // 清除RXNE标志
-//        uint8_t data = USART_ReceiveData(USART2);       // 读取数据（必须执行以清除标志）
-//    }
-//    if (USART_GetFlagStatus(USART2, USART_FLAG_ORE) == SET) {
-//        USART_ClearFlag(USART2, USART_FLAG_ORE);       // 清除ORE标志
-//        USART_ReceiveData(USART2);                     // 必须读取DR寄存器
-//    }
-//}
+void USART2_IRQHandler(void) {
+  uint8_t value = 0;
+  if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET){
+      USART_ClearITPendingBit(USART2,USART_IT_RXNE);
+      value = USART_ReceiveData(USART2);
+      gizPutData(&value, 1);
+  }
+}
 
 
 /*-------------------------------------------------*/
@@ -93,22 +96,22 @@ extern char Usart1_RxBuff[]; // 接收缓冲区
 //}
 
 //extern uint8_t timer4_flag; // TIM4中断标志
-//extern uint32_t system_time;    // 系统运行时间(秒)
+//extern uint32_t g_system_tick;    // 系统运行时间(秒)
 
 /*-------------------------------------------------*/
 /*函数名：定时器4中断服务函数                      */
 /*参  数：无                                       */
 /*返回值：无                                       */
 /*-------------------------------------------------*/
-//void TIM4_IRQHandler(void)
-//{
-//    if(TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
-//    {
-//        TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
-//        system_time++;  // 每秒增加
-//        timer4_flag = 1; // 设置标志位
-//    }
-//}
+void TIM4_IRQHandler(void)
+{
+   if(TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
+   {
+       TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
+       //g_system_tick++; // 系统滴答计数器递增
+       gizTimerMs(); // 调用gizwits协议的定时器函数
+   }
+}
 ///*-------------------------------------------------*/
 ///*函数名：定时器3中断服务函数                      */
 ///*参  数：无                                       */

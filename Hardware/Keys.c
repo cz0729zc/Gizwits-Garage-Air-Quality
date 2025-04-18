@@ -4,46 +4,62 @@
 void Key_Init(void) {
     GPIO_InitTypeDef GPIO_InitStruct;
     
-    // 初始化PB13和PB14
+    // 使能GPIOB时钟
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
     
-    GPIO_InitStruct.GPIO_Pin = KEY1_PIN | KEY2_PIN;
+    // 初始化PB12、PB13、PB14为上拉输入
+    GPIO_InitStruct.GPIO_Pin = SETTING_PIN | INCREASE_PIN | DECREASE_PIN;
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
     GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStruct);
 }
 
 Key_Value Key_Scan(void) {
-    static u8 key1_lock = 0, key2_lock = 0;
+    static u8 setting_lock = 0, increase_lock = 0, decrease_lock = 0;
     Key_Value result = KEY_NONE;
     
-    // 检测PB13
-    if(GPIO_ReadInputDataBit(KEY1_GPIO_PORT, KEY1_PIN) == RESET) {
-        if(!key1_lock) {
+    // 检测PB12(设置键)
+    if(GPIO_ReadInputDataBit(SETTING_PORT, SETTING_PIN) == RESET) {
+        if(!setting_lock) {
             delay_ms(15);
-            if(GPIO_ReadInputDataBit(KEY1_GPIO_PORT, KEY1_PIN) == RESET) {
-                result = KEY1_PRESSED;
+            if(GPIO_ReadInputDataBit(SETTING_PORT, SETTING_PIN) == RESET) {
+                result = KEY_SETTING_PRESSED;
             }
-            key1_lock = 1;
+            setting_lock = 1;
         }
     }
     else {
-        key1_lock = 0;
+        setting_lock = 0;
     }
     
-    // 检测PB14
-    if(GPIO_ReadInputDataBit(KEY2_GPIO_PORT, KEY2_PIN) == RESET) {
-        if(!key2_lock) {
+    // 检测PB13(增加键)
+    if(GPIO_ReadInputDataBit(INCREASE_PORT, INCREASE_PIN) == RESET) {
+        if(!increase_lock) {
             delay_ms(15);
-            if(GPIO_ReadInputDataBit(KEY2_GPIO_PORT, KEY2_PIN) == RESET) {
-                result = KEY2_PRESSED;
+            if(GPIO_ReadInputDataBit(INCREASE_PORT, INCREASE_PIN) == RESET) {
+                result = KEY_INCREASE_PRESSED;
             }
-            key2_lock = 1;
+            increase_lock = 1;
         }
     }
     else {
-        key2_lock = 0;
+        increase_lock = 0;
+    }
+    
+    // 检测PB14(减小键)
+    if(GPIO_ReadInputDataBit(DECREASE_PORT, DECREASE_PIN) == RESET) {
+        if(!decrease_lock) {
+            delay_ms(15);
+            if(GPIO_ReadInputDataBit(DECREASE_PORT, DECREASE_PIN) == RESET) {
+                result = KEY_DECREASE_PRESSED;
+            }
+            decrease_lock = 1;
+        }
+    }
+    else {
+        decrease_lock = 0;
     }
     
     return result;
 }
+

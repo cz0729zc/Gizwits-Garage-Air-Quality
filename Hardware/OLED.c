@@ -126,6 +126,31 @@ void OLED_Clear(void)
 }
 
 /**
+  * @brief  OLED清除指定行
+  * @param  Line 要清除的行号，范围：1~4
+  * @retval 无
+  */
+void OLED_ClearLine(uint8_t Line)
+{
+    uint8_t i;
+    if(Line < 1 || Line > 4) return;  // 行号范围检查
+    
+    // 清除上半行
+    OLED_SetCursor((Line - 1) * 2, 0);
+    for(i = 0; i < 128; i++)
+    {
+        OLED_WriteData(0x00);
+    }
+    
+    // 清除下半行
+    OLED_SetCursor((Line - 1) * 2 + 1, 0);
+    for(i = 0; i < 128; i++)
+    {
+        OLED_WriteData(0x00);
+    }
+}
+
+/**
   * @brief  OLED显示一个字符
   * @param  Line 行位置，范围：1~4
   * @param  Column 列位置，范围：1~16

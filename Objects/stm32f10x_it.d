@@ -30,3 +30,14 @@
 .\objects\stm32f10x_it.o: .\Library\stm32f10x_wwdg.h
 .\objects\stm32f10x_it.o: .\Library\misc.h
 .\objects\stm32f10x_it.o: .\Hardware\PM25.h
+.\objects\stm32f10x_it.o: .\System\usart\usart1.h
+.\objects\stm32f10x_it.o: D:\Development_Tool\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\stm32f10x_it.o: D:\Development_Tool\Keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\stm32f10x_it.o: D:\Development_Tool\Keil5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\stm32f10x_it.o: .\System\usart\usart2.h
+.\objects\stm32f10x_it.o: .\Gizwits\gizwits_product.h
+.\objects\stm32f10x_it.o: .\Gizwits\gizwits_protocol.h
+.\objects\stm32f10x_it.o: D:\Development_Tool\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\stm32f10x_it.o: D:\Development_Tool\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\stm32f10x_it.o: .\Utils\common.h
+.\objects\stm32f10x_it.o: D:\Development_Tool\Keil5\ARM\ARMCC\Bin\..\include\ctype.h

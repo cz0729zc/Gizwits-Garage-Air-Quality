@@ -4,19 +4,24 @@
 #include "stm32f10x.h"
 
 // 引脚定义
-#define KEY1_PIN        GPIO_Pin_13  // PB13
-#define KEY1_GPIO_PORT  GPIOB
-#define KEY1_GPIO_CLK   RCC_APB2Periph_GPIOB
+#define SETTING_PIN     GPIO_Pin_12  // PB12
+#define SETTING_PORT    GPIOB
+#define SETTING_CLK     RCC_APB2Periph_GPIOB
 
-#define KEY2_PIN        GPIO_Pin_14  // PB14
-#define KEY2_GPIO_PORT  GPIOB
-#define KEY2_GPIO_CLK   RCC_APB2Periph_GPIOB
+#define INCREASE_PIN    GPIO_Pin_13  // PB13
+#define INCREASE_PORT   GPIOB
+#define INCREASE_CLK    RCC_APB2Periph_GPIOB
+
+#define DECREASE_PIN    GPIO_Pin_14  // PB14
+#define DECREASE_PORT   GPIOB
+#define DECREASE_CLK    RCC_APB2Periph_GPIOB
 
 // 按键功能定义
 typedef enum {
     KEY_NONE = 0,
-    KEY1_PRESSED,    // PB13按键按下(注册)
-    KEY2_PRESSED     // PB14按键按下(注销)
+    KEY_SETTING_PRESSED,    // PB12按键按下(进入阈值设置界面)
+    KEY_INCREASE_PRESSED,   // PB13按键按下(增加)
+    KEY_DECREASE_PRESSED    // PB14按键按下(减小)
 } Key_Value;
 
 void Key_Init(void);

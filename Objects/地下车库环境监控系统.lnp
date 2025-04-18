@@ -45,6 +45,11 @@
 ".\objects\mq135.o"
 ".\objects\fan.o"
 ".\objects\ad.o"
+".\objects\common.o"
+".\objects\datapointtools.o"
+".\objects\ringbuffer.o"
+".\objects\gizwits_product.o"
+".\objects\gizwits_protocol.o"
 --strict --scatter ".\Objects\地下车库环境监控系统.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

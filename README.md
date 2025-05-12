@@ -1,15 +1,13 @@
+# **Underground-Garage-IoT-Monitor**
 
-
----
-
-# **Underground-Garage-IoT-Monitor**  
 **基于STM32与机智云的智能车库环境监控系统**  
 
 ### 🚀 项目概述
 
 通过STM32微控制器与物联网技术，实时监测地下车库环境参数（温湿度、PM2.5、有害气体、烟雾浓度），结合机智云平台与手机APP实现远程监控与通风控制，预防环境污染风险。  
 
-### 🌟 核心功能  
+### 🌟 核心功能
+
 - **多参数监测**  
   - DHT11传感器 → 温湿度  
   - ZH-01激光模块 → PM2.5浓度  
@@ -32,21 +30,30 @@
 
 ### 📂 仓库结构  
 ```  
-├── Hardware/           # STM32电路图与PCB设计  
-├── Firmware/           # Keil工程（传感器驱动+机智云协议）  
-├── Mobile_APP/         # 机智云生成的APP源码/配置  
-├── Docs/               # 论文/协议文档/测试报告  
-└── Demo_Videos/        # 系统演示视频  
+├─.vscode
+├─DebugConfig
+├─Gizwits
+├─Hardware
+├─Library
+├─Listings
+├─Objects
+├─Start
+├─System
+│  ├─delay
+│  ├─RTC
+│  ├─sys
+│  ├─timer
+│  └─usart
+├─User
+├─Utils
+└─机智云原始开发包
+    └─MCU_Common_source
+        ├─Gizwits
+        ├─User
+        └─Utils
 ```
 
 ### 📌 应用场景  
 - 地下停车场  
 - 仓储环境监控  
 - 工业封闭空间  
-
----
-
-**特点**：  
-- 直接关联毕业设计编号（D1975）  
-- 突出STM32与机智云的组合方案  
-- 结构化展示技术细节，便于开发者快速理解  
